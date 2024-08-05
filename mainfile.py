@@ -10,7 +10,7 @@ folders = {
     "documents": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/documents",
     "videos": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/videos",
     "audio": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/audio ",
-    "compressed": "/path/to/your/compressed/folder",
+    "compressed": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/Compressed folder",
     # Add more folders for other file types as needed
 }
 
@@ -38,4 +38,4 @@ for filename in all_files:
         shutil.move(os.path.join(source_directory, filename), folders["compressed"])
     # Add more conditions for other file types as needed
 
-print("Files have been sorted successfully!")
+print("Sorted successfully!")
