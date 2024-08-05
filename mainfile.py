@@ -11,6 +11,7 @@ folders = {
     "documents": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/documents",
     "videos": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/videos",
     "audio": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/audio",
+    "executable":"/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/excutable folder",
     "compressed": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/Compressed folder",
     # Add more folders for other file types as needed
 }
@@ -48,6 +49,8 @@ for filename in all_files:
     elif file_extension in (".zip", ".rar", ".7z"):
         # Move compressed files to the "compressed" folder
         shutil.move(file_path, folders["compressed"])
-    # Add more conditions for other file types as needed
+    elif file_extension == ".exe":
+    # Move executable files to a specific folder (e.g., "executables")
+        shutil.move(file_path, folders["executables"])
 
 print("Sorted successfully!")
