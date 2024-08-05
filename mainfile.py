@@ -1,18 +1,27 @@
 import os
 import shutil
-import magic
 
 # Define the source directory
 source_directory = "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-"
 
 # Create separate folders for each file type
 folders = {
-    "images": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/Image",
-    "documents": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/documents",
-    "videos": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/videos",
-    "audio": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/audio",
-    "executable":"/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/excutable folder",
-    "compressed": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/Compressed folder",
+    ".jpg": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/Image",
+    ".png": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/Image",
+    ".gif": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/Image",
+    ".doc": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/documents",
+    ".pdf": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/documents",
+    ".txt": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/documents",
+    ".mp4": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/videos",
+    ".avi": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/videos",
+    ".mov": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/videos",
+    ".mp3": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/audio",
+    ".wav": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/audio",
+    ".flac": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/audio",
+    ".zip": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/Compressed folder",
+    ".rar": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/Compressed folder",
+    ".7z": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/Compressed folder",
+    ".exe": "/Users/thaonguyen/Desktop/self-study/Python challenge/automatic-file-sorted-project-/excutable folder",
     # Add more folders for other file types as needed
 }
 
@@ -23,34 +32,13 @@ for folder_path in folders.values():
 # Get a list of all files in the source directory
 all_files = os.listdir(source_directory)
 
-# Initialize the magic library
-magic_instance = magic.Magic()
-
 # Iterate through each file and move it to the appropriate folder
 for filename in all_files:
     file_path = os.path.join(source_directory, filename)
     file_extension = os.path.splitext(filename)[1].lower()
 
-    # Use magic to detect the file type
-    file_type = magic_instance.from_file(file_path, mime=True)
+    if file_extension in folders:
+        # Move the file to the corresponding folder
+        shutil.move(file_path, folders[file_extension])
 
-    if file_extension in (".jpg", ".png", ".gif"):
-        # Move image files to the "images" folder
-        shutil.move(file_path, folders["images"])
-    elif file_extension in (".doc", ".pdf", ".txt"):
-        # Move document files to the "documents" folder
-        shutil.move(file_path, folders["documents"])
-    elif file_extension in (".mp4", ".avi", ".mov"):
-        # Move video files to the "videos" folder
-        shutil.move(file_path, folders["videos"])
-    elif file_extension in (".mp3", ".wav", ".flac"):
-        # Move audio files to the "audio" folder
-        shutil.move(file_path, folders["audio"])
-    elif file_extension in (".zip", ".rar", ".7z"):
-        # Move compressed files to the "compressed" folder
-        shutil.move(file_path, folders["compressed"])
-    elif file_extension == ".exe":
-    # Move executable files to a specific folder (e.g., "executables")
-        shutil.move(file_path, folders["executables"])
-
-print("Sorted successfully!")
+print("Files sorted successfully!")
